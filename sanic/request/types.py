@@ -682,16 +682,16 @@ class Request(Generic[sanic_type, ctx_type]):
         return self.parsed_form
 
     @property
-    def files(self) -> RequestParameters | None:
+    def files(self) -> RequestParameters:
         """The request body parsed as uploaded files
 
         Returns:
-            RequestParameters | None: The request body parsed as uploaded files
-        """  # noqa: E501
+            RequestParameters: The request body parsed as uploaded files
+        """
         if self.parsed_files is None:
             self.form  # compute form to get files
 
-        return self.parsed_files
+        return cast(RequestParameters, self.parsed_files)
 
     def get_args(
         self,
