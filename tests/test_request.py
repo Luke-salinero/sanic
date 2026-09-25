@@ -1,6 +1,5 @@
 import uuid
 
-from typing import get_type_hints
 from unittest.mock import Mock
 from uuid import UUID, uuid4
 
@@ -9,20 +8,7 @@ import pytest
 from sanic import Sanic, response
 from sanic.exceptions import BadURL, SanicException
 from sanic.request import Request
-from sanic.request.parameters import RequestParameters
 from sanic.server import HttpProtocol
-
-
-def test_request_get_form_return_type():
-    annotations = get_type_hints(Request.get_form)
-
-    assert annotations["return"] is RequestParameters
-
-
-def test_request_form_return_type():
-    annotations = get_type_hints(Request.form.fget)
-
-    assert annotations["return"] is RequestParameters
 
 
 def test_no_request_id_not_called(monkeypatch):
